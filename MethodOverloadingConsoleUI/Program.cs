@@ -10,9 +10,9 @@ namespace MethodOverloadingConsoleUI
 
             // #1 - Call the Method Sum passing the two integers
             Console.Write("Enter an Integer ");
-            int firstInt = int.Parse(Console.ReadLine());
+            int firstInt = NumberConverter(Console.ReadLine());
             Console.Write("Enter another Integer ");
-            int secondInt = int.Parse(Console.ReadLine());            
+            int secondInt = NumberConverter(Console.ReadLine());
             int integerSum = Sum(firstInt, secondInt);
             Console.WriteLine($"The Sum of these two Integers is {integerSum}");
             Console.WriteLine();
@@ -36,8 +36,7 @@ namespace MethodOverloadingConsoleUI
             {
                 haveDollars = true;
                 Console.Write("Enter Your Number of Dollar Bills  ");
-                userDollars = int.Parse(Console.ReadLine());
-               
+                userDollars = NumberConverter(Console.ReadLine());               
                 if (userDollars < 5 && userDollars != 1)
                 {// Give a Bonus                    
                     bonusDollars = 4;
@@ -55,6 +54,20 @@ namespace MethodOverloadingConsoleUI
             string stringBonusSum = Sum(userDollars, bonusDollars, haveDollars);
             Console.WriteLine($"Your Total is {stringBonusSum}!!");
         }
+        public static int NumberConverter(string str) 
+        // Challenge Exercise - Check for Integer and keep asking user until a valid Integer is entered
+        {
+            int result;
+            // The user will be asked to renter a value until a vaild integer is input
+            while (int.TryParse(str, out result) == false)              
+            {
+                Console.WriteLine($"{str} is not an Integer");
+                Console.Write("Try Again ");
+                str = Console.ReadLine();
+            } 
+            return result;
+        }
+                
         public static int Sum(int num1, int num2)
         // #1- This version of the Sum Method Accepts two integers and returns their sum
         {
